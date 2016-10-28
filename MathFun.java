@@ -21,6 +21,23 @@ public class MathFun
     return true;
   }
   
+  /**
+   * Estimates the natural log of 2 by iterating the sum of a sequence.
+   * 1 - 1/2 + 1/3 - 1/4 etc.
+   * @param n the number of iterations
+   * @return estimate for ln(2)
+   */
+  public static double ln2(int n)
+  {
+    double sum = 0.0;
+    int sign = 1;
+    for (int i = 1; i <= n; i++)
+    {
+      sum = sum + sign * (1.0 / i);
+      sign = -sign;
+    }
+    return sum;
+  }
   
   /** factorial calculates n! = 1 * 2 * ... * (n-1) * n
     * 0! = 1.  
@@ -43,15 +60,26 @@ public class MathFun
   {
     Scanner kboard = new Scanner(System.in);
 
-    System.out.print("Enter an integer: ");
+    System.out.print("Enter an integer (0 to quit): ");
     int num = kboard.nextInt();
+  
+    while (num != 0)
+    {
+      double estimate = ln2(num);
+      System.out.println ("Estimate for ln(2): " + estimate);
+      System.out.println ("Differs from ln(2) by " + (estimate - Math.log(2)));
+      System.out.println ();
     
-    System.out.println (num + "! = " + factorial(num));
+      System.out.print("Enter an integer (0 to quit): ");
+      num = kboard.nextInt();
+                    
+//    System.out.println (num + "! = " + factorial(num));
 /*    if (isPrime(num))
       System.out.println(num + " is a prime number!");
     else
       System.out.println(num + " is NOT a prime number.");
- */         
+ */      
+    }
     kboard.close();
   }
 }
