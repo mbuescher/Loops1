@@ -17,7 +17,17 @@ public class MathFun
     */
   public static boolean isPrime (int n)
   {
-    /* code goes here! */
+   if (n <= 2)
+      return false;
+    if (n % 2 == 0)
+      return false;
+    int divisor = 3;
+     while (Math.sqrt(n) >= divisor)
+    {
+      if (n % divisor == 0)
+        return false;
+      divisor += 2;
+    }
     return true;
   }
   
@@ -30,11 +40,12 @@ public class MathFun
   public static double ln2(int n)
   {
     double sum = 0.0;
-    int sign = 1;
     for (int i = 1; i <= n; i++)
     {
-      sum = sum + sign * (1.0 / i);
-      sign = -sign;
+      if (i % 2 == 1)
+        sum += 1.0 / i;
+      else
+        sum -= 1.0 / i;
     }
     return sum;
   }
@@ -60,25 +71,28 @@ public class MathFun
   {
     Scanner kboard = new Scanner(System.in);
 
+
     System.out.print("Enter an integer (0 to quit): ");
     int num = kboard.nextInt();
   
     while (num != 0)
     {
-      double estimate = ln2(num);
+/*      double estimate = ln2(num);
       System.out.println ("Estimate for ln(2): " + estimate);
       System.out.println ("Differs from ln(2) by " + (estimate - Math.log(2)));
       System.out.println ();
-    
-      System.out.print("Enter an integer (0 to quit): ");
-      num = kboard.nextInt();
-                    
+*/                 
 //    System.out.println (num + "! = " + factorial(num));
-/*    if (isPrime(num))
+      
+    if (isPrime(num))
       System.out.println(num + " is a prime number!");
     else
       System.out.println(num + " is NOT a prime number.");
- */      
+    
+          
+      System.out.print("Enter an integer (0 to quit): ");
+      num = kboard.nextInt();
+   
     }
     kboard.close();
   }
